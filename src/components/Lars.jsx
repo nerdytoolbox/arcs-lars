@@ -203,7 +203,7 @@ const Lars = ({ nLars, state, map, handleMoveFocus }) => {
 				</div>
 			)}
 			{showInstructions && (
-				<div className="align-vertically center-align">
+				<div className="align-vertically center-align info-block">
 					{declareAmbition && <ListItemWithInfo item="Declare ambition" info="Declare highest ambition to the corresponding card. 4 player game: If card is a 1, ignore. If the card is a 7  roll a dice to determine the ambition (reroll on 1)." />}
 					{seizeInitiative && <ListItemWithInfo item="Seize initiative. Increase Resource power by 2." info="If Lars can lead next turn and initiative has not yet been seized, play an extra card and give Lars the first player marker. 4 player game: If the card is a 7, don't play the extra card and don't gain 2 Resource Power." />}
 					{showSuitInstructions()}

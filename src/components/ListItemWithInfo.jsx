@@ -12,10 +12,12 @@ const ListItemWithInfo = ({ item, info = "" }) => {
 	return (
 		<div className="align-vertically">
 			<div className="align-horizontally">
-				<div className="icon">
-					{!infoVisible && info.length > 0 && <FaQuestionCircle onClick={handleClick}/>}
-					{infoVisible && <FaWindowClose onClick={handleClick}/>}
-				</div>
+				{info.length > 0 && (
+					<div className="icon">
+						{!infoVisible && <FaQuestionCircle onClick={handleClick}/>}
+						{infoVisible && <FaWindowClose onClick={handleClick}/>}
+					</div>
+				)}
 				<div className="list-item">{item}</div>
 			</div>
 			{infoVisible && (<div className="tooltip">{info}</div>)}
