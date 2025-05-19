@@ -1,0 +1,37 @@
+.custom-button {
+  height: 2rem;
+  border: 1px solid black;
+  cursor: pointer;
+  padding: 0 0.5rem;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.primary-not-selected {
+  background-color: #602d60;
+  color: white;
+  font-weight: bold;
+}
+
+.selection-not-selected {
+  background-color: lightgray;
+}
+
+.selection-selected {
+  background-color: #404040;
+  color: white;
+  font-weight: bold;
+}
+
+.custom-button-small {
+  width: 2rem;
+}
+
+.custom-button-large {
+  width: 9rem;
+}
+
+
+
