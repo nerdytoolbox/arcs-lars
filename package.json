@@ -11,7 +11,8 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
+    "deploy": "gh-pages -d dist",
+    "gitDeploy": "npm run deploy -- -m \"Deploy React app to GitHub Pages\""
   },
   "dependencies": {
     "nerdy-lib": "github:nerdytoolbox/nerdy-lib",
