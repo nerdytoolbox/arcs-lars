@@ -2,7 +2,7 @@
   "name": "arcs-lars",
   "homepage": "https://nerdytoolbox.github.io/arcs-lars",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
   "scripts": {
     "build": "vite build",
