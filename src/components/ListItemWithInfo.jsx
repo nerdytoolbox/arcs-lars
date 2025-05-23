@@ -10,8 +10,8 @@ const ListItemWithInfo = ({ item, info = "" }) => {
 	}
 
 	return (
-		<div className="align-vertically">
-			<div className="align-horizontally">
+		<div className="align-vertical">
+			<div className="align-horizontal">
 				{info.length > 0 && (
 					<div className="icon">
 						{!infoVisible && <FaQuestionCircle onClick={handleClick}/>}

@@ -1,16 +1,16 @@
-import ArcsButton from "./ArcsButton/ArcsButton.jsx";
+import { BlueButton } from "./ArcsButton/BlueButton.jsx";
 
 const AppInfo = ({ handleCloseAppInfo }) => {
 	return (
-		<div className="align-vertically center-align info-block">
-			<div className="align-vertically block left-align">
+		<div className="align-vertical align-center info-block">
+			<div className="align-vertical block left-align">
 				<details>
 					<summary>Source of the Lars bot</summary>
 					<ul>
 						<li>
 							This app was created using the information of the <a
 							href="https://boardgamegeek.com/thread/3378766/arcs-solo-bot-lars" target="_blank">ARCS Solo Bot Lars
-							rules</a> from Shipple.
+							rules</a> from Shipple (Andries Lubbe).
 						</li>
 						<li>
 							There is a difference: This app supports 2 and 4 player games, where the rules from Shipple do not
@@ -57,7 +57,7 @@ const AppInfo = ({ handleCloseAppInfo }) => {
 					</ul>
 				</details>
 			</div>
-			<ArcsButton value="Close Info" size="large" type="primary" onClick={handleCloseAppInfo}/>
+			<BlueButton onClick={handleCloseAppInfo}>Close info</BlueButton>
 		</div>
 	)
 }

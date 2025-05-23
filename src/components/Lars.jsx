@@ -1,8 +1,8 @@
-import ArcsButton from "./ArcsButton/ArcsButton.jsx";
 import { useState } from "react";
 import ListItemWithInfo from "./ListItemWithInfo";
 import { ID } from "../util/constants";
 import { randomNumber } from "../util/randomNumber.js";
+import { BlueButton, GrayButton } from "./ArcsButton/BlueButton.jsx";
 
 const Lars = ({ nLars, state, map, handleMoveFocus }) => {
 	const [playLeadCard, setPlayLeadCard] = useState(false);
@@ -186,31 +186,31 @@ const Lars = ({ nLars, state, map, handleMoveFocus }) => {
 	}
 
 	return (
-		<div className="align-vertically center-align">
-			<div className="center-align bold">{`Player ${state.playerNumber}`}</div>
-			<div className="center-align">{`Target planet: Cluster ${state.targetPlanet} - ${ID[state.targetPlanetID]}`}</div>
-			<div className="align-horizontally center-align">
-				{playFollowCard !== true && <ArcsButton value="Play lead card" size="large" onClick={handlePlayLeadCard} selected={playLeadCard} />}
-				{playLeadCard !== true && <ArcsButton value="Play follow card" size="large" onClick={handlePlayFollowCard} selected={playFollowCard} />}
+		<div className="align-vertical align-center">
+			<div className="align-center bold">{`Player ${state.playerNumber}`}</div>
+			<div className="align-center">{`Target planet: Cluster ${state.targetPlanet} - ${ID[state.targetPlanetID]}`}</div>
+			<div className="align-horizontal align-center">
+				{playFollowCard !== true && <GrayButton onClick={handlePlayLeadCard} selected={playLeadCard}>Play lead card</GrayButton>}
+				{playLeadCard !== true && <GrayButton onClick={handlePlayFollowCard} selected={playFollowCard}>Play follow card</GrayButton>}
 			</div>
-			{copyLeadCard && <div className="center-align block">Copy lead card</div>}
+			{copyLeadCard && <div className="align-center block">Copy lead card</div>}
 			{(playLeadCard || playFollowCard) && (
-				<div className="align-horizontally center-align">
-					{(cardSuit === null || cardSuit === "Aggression") && <ArcsButton value="Aggression" size="large" onClick={() => handleSuitButton("Aggression")} selected={cardSuit === "Aggression"} />}
-					{(cardSuit === null || cardSuit === "Administration") && <ArcsButton value="Administration" size="large" onClick={() => handleSuitButton("Administration")} selected={cardSuit === "Administration"} />}
-					{(cardSuit === null || cardSuit === "Mobilisation") && <ArcsButton value="Mobilisation" size="large" onClick={() => handleSuitButton("Mobilisation")} selected={cardSuit === "Mobilisation"} />}
-					{(cardSuit === null || cardSuit === "Construction") && <ArcsButton value="Construction" size="large" onClick={() => handleSuitButton("Construction")} selected={cardSuit === "Construction"} />}
+				<div className="align-horizontal align-center wrap">
+					{(cardSuit === null || cardSuit === "Aggression") && <GrayButton onClick={() => handleSuitButton("Aggression")} selected={cardSuit === "Aggression"}>Aggression</GrayButton>}
+					{(cardSuit === null || cardSuit === "Administration") && <GrayButton onClick={() => handleSuitButton("Administration")} selected={cardSuit === "Administration"}>Administration</GrayButton>}
+					{(cardSuit === null || cardSuit === "Mobilisation") && <GrayButton onClick={() => handleSuitButton("Mobilisation")} selected={cardSuit === "Mobilisation"}>Mobilisation</GrayButton>}
+					{(cardSuit === null || cardSuit === "Construction") && <GrayButton onClick={() => handleSuitButton("Construction")} selected={cardSuit === "Construction"}>Construction</GrayButton>}
 				</div>
 			)}
 			{showInstructions && (
-				<div className="align-vertically center-align info-block">
+				<div className="align-vertical left-align info-block">
 					{declareAmbition && <ListItemWithInfo item="Declare ambition" info="Declare highest ambition to the corresponding card. 4 player game: If card is a 1, ignore. If the card is a 7  roll a dice to determine the ambition (reroll on 1)." />}
 					{seizeInitiative && <ListItemWithInfo item="Seize initiative. Increase Resource power by 2." info="If Lars can lead next turn and initiative has not yet been seized, play an extra card and give Lars the first player marker. 4 player game: If the card is a 7, don't play the extra card and don't gain 2 Resource Power." />}
 					{showSuitInstructions()}
 					{moveFocus && <ListItemWithInfo item="At the end of the turn, the Target Planet will be moved automatically." />}
-					<div className="center-align">
-						<ArcsButton value="Cancel" size="large" onClick={resetTurn} />
-						<ArcsButton value="Done" size="large" onClick={handleDoneButton} />
+					<div className="align-horizontal align-center">
+						<GrayButton onClick={resetTurn}>Cancel</GrayButton>
+						<BlueButton onClick={handleDoneButton}>Done</BlueButton>
 					</div>
 				</div>
 			)}

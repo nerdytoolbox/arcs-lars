@@ -1,9 +1,10 @@
 import { useState } from "react";
-import { ARCS_STATE, EMPTY_GAME_STATE, LOCATIONS, MAPS } from "../util/constants";
+import { EMPTY_GAME_STATE, LOCATIONS, MAPS } from "../util/constants";
 import { getOutOfPlayLocations } from "../util/getOutOfPlayLocations.js";
 import AppInfo from "./AppInfo";
-import ArcsButton from "./ArcsButton/ArcsButton.jsx";
 import { shuffleArray } from "../util/shuffleArray.js";
+import { Button } from "nerdy-lib";
+import { BlueButton } from "./ArcsButton/BlueButton.jsx";
 
 const NewGame = ({ handleGameStateChange }) => {
 	const [nPlayers, setNPlayers] = useState(2)
@@ -44,32 +45,32 @@ const NewGame = ({ handleGameStateChange }) => {
 	const maps = Object.keys(MAPS).filter(map => map.startsWith(nPlayers.toString()))
 
 	return (
-		<div className="align-vertically center-align">
-			{!infoSelected && <ArcsButton value="Info" size="large" type="primary" onClick={() => setInfoSelected(true)} />}
+		<div className="align-vertical align-center">
+			{!infoSelected && <BlueButton onClick={() => setInfoSelected(true)}>Info</BlueButton>}
 			{infoSelected && <AppInfo handleCloseAppInfo={() => setInfoSelected(false)} />}
 
 			<h1>New Game</h1>
-			<div className="align-horizontally center-align block">
+			<div className="align-horizontal align-center block">
 				<span># Players</span>
-				<ArcsButton value={2} size="small" selected={nPlayers === 2} onClick={() => handlePlayerClick(2)}/>
-				<ArcsButton value={3} size="small" selected={nPlayers === 3} onClick={() => handlePlayerClick(3)}/>
-				<ArcsButton value={4} size="small" selected={nPlayers === 4} onClick={() => handlePlayerClick(4)}/>
+				<Button size="size0" fill="ghost" selected={nPlayers === 2} onClick={() => handlePlayerClick(2)}>2</Button>
+				<Button size="size0" fill="ghost" selected={nPlayers === 3} onClick={() => handlePlayerClick(3)}>3</Button>
+				<Button size="size0" fill="ghost" selected={nPlayers === 4} onClick={() => handlePlayerClick(4)}>4</Button>
 			</div>
 
-			<div className="align-horizontally center-align block">
+			<div className="align-horizontal align-center block">
 				<span># Lars</span>
-				<ArcsButton value={1} size="small" selected={nLars === 1} onClick={() => setNLars(1)}/>
-				<ArcsButton value={2} size="small" selected={nLars === 2} onClick={() => setNLars(2)}/>
+				<Button size="size0" fill="ghost" selected={nLars === 1} onClick={() => setNLars(1)}>1</Button>
+				<Button size="size0" fill="ghost" selected={nLars === 2} onClick={() => setNLars(2)}>2</Button>
 			</div>
 
-			<div className="align-vertically center-align block">
+			<div className="align-vertical align-center block">
 				<span>Map for {nPlayers} players</span>
 				{maps.map((map, index) => (
-					<ArcsButton key={index} value={map.slice(1, map.length)} size="large" selected={selectedMap === map} onClick={() => setSelectedMap(map)}/>
+					<Button key={index} size="size5" fill="filled" selected={selectedMap === map} onClick={() => setSelectedMap(map)}>{map.slice(1, map.length)}</Button>
 				))}
 			</div>
 
-			{selectedMap && <ArcsButton value={"Start Game"} size="large" type="primary" onClick={handleStartGame} />}
+			{selectedMap && <BlueButton onClick={handleStartGame}>Start Game</BlueButton>}
 
 			{/*DEV ArcsButton to be able to change the initial state*/}
 			{/*<div className="start-game">*/}

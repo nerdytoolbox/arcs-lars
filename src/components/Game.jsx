@@ -3,8 +3,8 @@ import { useState } from "react";
 import Lars from "./Lars";
 import AppInfo from "./AppInfo";
 import EndOfChapter from "./EndOfChapter";
-import ArcsButton from "./ArcsButton/ArcsButton.jsx";
 import { randomNumber } from "../util/randomNumber.js";
+import { BlueButton, GrayButton } from "./ArcsButton/BlueButton.jsx";
 
 const Game = ({ gameState, handleGameStateChange }) => {
 	const [infoSelected, setInfoSelected] = useState(false)
@@ -38,21 +38,24 @@ const Game = ({ gameState, handleGameStateChange }) => {
 	}
 
 	return (
-		<div className="align-vertically center-align">
+		<div className="align-vertical align-center">
 			{infoSelected && <AppInfo handleCloseAppInfo={() => setInfoSelected(false)} />}
-			{!infoSelected && <ArcsButton value="Info" size="large" type="primary" onClick={() => setInfoSelected(true)} />}
-			<div className="align-horizontally center-align">
-				{!endOfChapterSelected && <ArcsButton value="End of Chapter" size="large" onClick={() => setEndOfChapterSelected(true)} />}
-				{endOfChapterSelected && <ArcsButton value="Cancel" size="large" onClick={() => setEndOfChapterSelected(false)} />}
-				<ArcsButton value="Reset Game" size="large" onClick={handleResetGame}/>
+			{!infoSelected && <BlueButton onClick={() => setInfoSelected(true)}>Info</BlueButton>}
+			<div className="datetime align-center">Game started on {gameState.dateTimeStarted}</div>
+			<div className="map-info align-center">{`Map: ${gameState.nPlayers} players, ${gameState.map.slice(1, gameState.map.length)}`}</div>
+			<div className="align-horizontal align-center wrap">
+				{!endOfChapterSelected && <GrayButton onClick={() => setEndOfChapterSelected(true)}>End of Chapter</GrayButton>}
+				{endOfChapterSelected && <GrayButton onClick={() => setEndOfChapterSelected(false)}>Cancel</GrayButton>}
+				<GrayButton value="Reset Game" onClick={handleResetGame}>Reset Game</GrayButton>
 			</div>
 			{endOfChapterSelected && <EndOfChapter handleConfirmEndOfChapter={handleEndOfChapterDone} handleExitEndOfChapter={() => setEndOfChapterSelected(false)} />}
-			<div className="datetime center-align">Game started on {gameState.dateTimeStarted}</div>
-			<div className="map-info center-align">{`Map: ${gameState.nPlayers} players, ${gameState.map.slice(1, gameState.map.length)}`}</div>
 			{gameState.nLars === 2 && (
-				<div className="align-horizontally center-align">
-					<ArcsButton value={"Lars 1"} selected={selectedLars === 1} size="large" onClick={() => setSelectedLars(1)} />
-					<ArcsButton value={"Lars 2"} selected={selectedLars === 2} size="large" onClick={() => setSelectedLars(2)} />
+				<div className="align-vertical align-center">
+					<hr width="100%" />
+					<div className="align-horizontal">
+						<GrayButton selected={selectedLars === 1} onClick={() => setSelectedLars(1)}>Lars 1</GrayButton>
+						<GrayButton selected={selectedLars === 2} onClick={() => setSelectedLars(2)}>Lars 2</GrayButton>
+					</div>
 				</div>
 			)}
 			{selectedLars === 1 && (<Lars nLars={1} state={gameState.lars1} map={MAPS[gameState.map]} handleMoveFocus={handleMoveFocus} />)}
