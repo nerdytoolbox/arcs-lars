@@ -2,23 +2,15 @@ html {
   font-size: 14px;
 }
 
-.arcs-main-app {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 100%;
+.footer {
   width: 100%;
+  font-size: 0.6rem;
+  color: var(--paynes-gray);
+  text-align: center;
 
-  .footer {
-    width: 100%;
-    font-size: 0.6rem;
+  a, a:hover, a:active {
     color: var(--paynes-gray);
-    text-align: center;
-
-    a, a:hover, a:active {
-      color: var(--paynes-gray);
-      text-decoration: none;
-    }
+    text-decoration: none;
   }
 }
 

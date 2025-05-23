@@ -15,7 +15,7 @@
     "gitDeploy": "npm run deploy -- -m \"Deploy React app to GitHub Pages\""
   },
   "dependencies": {
-    "nerdy-lib": "github:nerdytoolbox/nerdy-lib#v1.4.0",
+    "nerdy-lib": "github:nerdytoolbox/nerdy-lib#v1.5.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-icons": "^5.5.0"

@@ -22,17 +22,20 @@ const Arcs = () => {
 		})
 	}
 
-	return (
-		<Hub title="Arcs - Lars bots">
-			<div className="arcs-main-app">
-				{!gameState.dateTimeStarted && <NewGame handleGameStateChange={handleGameStateChange} />}
-				{gameState.dateTimeStarted && <Game gameState={gameState} handleGameStateChange={handleGameStateChange} />}
-				<div className="footer">
-					<a href="https://github.com/nerdytoolbox/arcs-lars/issues/new">Report issues / Feature requests</a>
-					<span> | </span>
-					<a href="https://boardgamegeek.com/thread/3378766/arcs-solo-bot-lars">Rules from Shipple (Andries Lubbe)</a>
-				</div>
+	const getFooter = () => {
+		return (
+			<div className="footer">
+				<a href="https://github.com/nerdytoolbox/arcs-lars/issues/new">Report issues / Feature requests</a>
+				<span> | </span>
+				<a href="https://boardgamegeek.com/thread/3378766/arcs-solo-bot-lars">Rules from Shipple (Andries Lubbe)</a>
 			</div>
+		)
+	}
+
+	return (
+		<Hub title="Arcs - Lars bots" footer={getFooter()}>
+			{!gameState.dateTimeStarted && <NewGame handleGameStateChange={handleGameStateChange} />}
+			{gameState.dateTimeStarted && <Game gameState={gameState} handleGameStateChange={handleGameStateChange} />}
 		</Hub>
 	)
 }
