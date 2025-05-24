@@ -5,10 +5,6 @@ import { ARCS_STATE, EMPTY_GAME_STATE } from "./util/constants";
 import './Arcs.scss'
 import { Hub } from "nerdy-lib";
 
-// TODO / Questions
-// - After move, what if all systems are controlled until the Gate, what then?
-// - Currently their own starport is also considered out of play, which should not be the case
-
 const Arcs = () => {
 	// Checks if there is a game state in local storage and sets it to the gameState state variable. If not, it sets the gameState to the empty game state.
 	const [gameState, setGameState] = useState(localStorage.getItem(ARCS_STATE) ? JSON.parse(localStorage.getItem(ARCS_STATE)) : JSON.stringify(EMPTY_GAME_STATE))
