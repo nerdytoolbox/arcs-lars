@@ -7,11 +7,13 @@ export const EMPTY_GAME_STATE = Object.freeze({
 	nLars: null,
 	lars1: {
 		playerNumber: null,
+		playerColor: "red",
 		targetPlanet: null,
 		targetPlanetID: null,
 	},
 	lars2: {
 		playerNumber: null,
+		playerColor: "blue",
 		targetPlanet: null,
 		targetPlanetID: null,
 	}

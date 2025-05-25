@@ -5,11 +5,11 @@ import AppInfo from "./AppInfo";
 import EndOfChapter from "./EndOfChapter";
 import { randomNumber } from "../util/randomNumber.js";
 import { BlueButton, GrayButton } from "./ArcsButton/BlueButton.jsx";
+import { Button } from "nerdy-lib";
 
-const Game = ({ gameState, handleGameStateChange }) => {
+const Game = ({ gameState, handleGameStateChange, selectedLars, handleSelectLars }) => {
 	const [infoSelected, setInfoSelected] = useState(false)
 	const [endOfChapterSelected, setEndOfChapterSelected] = useState(false)
-	const [selectedLars, setSelectedLars] = useState(1)
 
 	const handleResetGame = () => {
 		handleGameStateChange(JSON.parse(JSON.stringify(EMPTY_GAME_STATE)))
@@ -53,8 +53,8 @@ const Game = ({ gameState, handleGameStateChange }) => {
 				<div className="align-vertical align-center">
 					<hr width="100%" />
 					<div className="align-horizontal">
-						<GrayButton selected={selectedLars === 1} onClick={() => setSelectedLars(1)}>Lars 1</GrayButton>
-						<GrayButton selected={selectedLars === 2} onClick={() => setSelectedLars(2)}>Lars 2</GrayButton>
+						<Button color={gameState.lars1.playerColor} size="size4" selected={selectedLars === 1} onClick={() => handleSelectLars(1)}>Lars 1</Button>
+						<Button color={gameState.lars2.playerColor} size="size4" selected={selectedLars === 2} onClick={() => handleSelectLars(2)}>Lars 2</Button>
 					</div>
 				</div>
 			)}
