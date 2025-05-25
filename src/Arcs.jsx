@@ -24,6 +24,8 @@ const Arcs = () => {
 				<a href="https://github.com/nerdytoolbox/arcs-lars/issues/new?template=ISSUE_TEMPLATE.md">Report issues / Feature requests</a>
 				<span> | </span>
 				<a href="https://boardgamegeek.com/thread/3378766/arcs-solo-bot-lars">Rules from Shipple (Andries Lubbe)</a>
+				<span> | </span>
+				<span>v1.0.0</span>
 			</div>
 		)
 	}
