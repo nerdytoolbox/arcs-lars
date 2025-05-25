@@ -72,10 +72,7 @@ const NewGame = ({ handleGameStateChange }) => {
 
 			{selectedMap && <BlueButton onClick={handleStartGame}>Start Game</BlueButton>}
 
-			{/*DEV ArcsButton to be able to change the initial state*/}
-			{/*<div className="start-game">*/}
-			{/*	<ToggleButton value={"Remove State"} size="large" type="primary" onClick={() => localStorage.removeItem(ARCS_STATE)} />*/}
-			{/*</div>*/}
+			{/*<Button size="size4" onClick={() => localStorage.removeItem(ARCS_STATE)}>Remove State</Button>*/}
 		</div>
 	)
 }
