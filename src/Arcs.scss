@@ -5,11 +5,11 @@ html {
 .footer {
   width: 100%;
   font-size: 0.6rem;
-  color: var(--paynes-gray);
+  color: var(--gray);
   text-align: center;
 
   a, a:hover, a:active {
-    color: var(--paynes-gray);
+    color: var(--gray);
     text-decoration: none;
   }
 }
@@ -26,8 +26,12 @@ html {
   flex-wrap: wrap;
 }
 
-.info-block {
+.lars-info {
   width: 90%;
+}
+
+.instructions {
+  width: 100%;
 }
 
 .datetime {
@@ -61,6 +65,10 @@ html {
   font-size: 0.8rem;
   font-style: italic;
   color: #222222;
+
+  @media (prefers-color-scheme: dark) {
+    color: #dddddd;
+  }
 }
 
 .custom-button {
@@ -83,7 +91,11 @@ ul {
     margin-top: 5.5rem;
   }
 
-  .info-block {
-    width: 70%;
+  .lars-info {
+    width: 50%;
   }
+}
+
+a, a:hover, a:active {
+  color: var(--azure);
 }

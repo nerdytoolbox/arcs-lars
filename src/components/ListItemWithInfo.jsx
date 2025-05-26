@@ -1,6 +1,5 @@
 import { useState } from "react";
-import { FaQuestionCircle } from "react-icons/fa";
-import { FaWindowClose } from "react-icons/fa";
+import { FaQuestionCircle, FaWindowClose } from "react-icons/fa";
 
 const ListItemWithInfo = ({ item, info = "" }) => {
 	const [infoVisible, setInfoVisible] = useState(false)

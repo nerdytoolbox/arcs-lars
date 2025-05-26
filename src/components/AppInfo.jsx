@@ -1,6 +1,6 @@
-import { BlueButton } from "./ArcsButton/BlueButton.jsx";
+import { BlueButton, LightBlueButton } from "./ArcsButton/ArcsButtons.jsx";
 
-const AppInfo = ({ handleCloseAppInfo }) => {
+const AppInfo = ({ handleCloseAppInfo, isDarkMode }) => {
 	return (
 		<div className="align-vertical align-center info-block">
 			<div className="align-vertical block left-align">
@@ -57,7 +57,10 @@ const AppInfo = ({ handleCloseAppInfo }) => {
 					</ul>
 				</details>
 			</div>
-			<BlueButton onClick={handleCloseAppInfo}>Close info</BlueButton>
+			{isDarkMode ?
+				<BlueButton onClick={handleCloseAppInfo}>Close info</BlueButton> :
+				<LightBlueButton onClick={handleCloseAppInfo}>Close info</LightBlueButton>
+			}
 		</div>
 	)
 }

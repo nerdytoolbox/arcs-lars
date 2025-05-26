@@ -3,10 +3,9 @@ import { EMPTY_GAME_STATE, LOCATIONS, MAPS } from "../util/constants";
 import { getOutOfPlayLocations } from "../util/getOutOfPlayLocations.js";
 import AppInfo from "./AppInfo";
 import { shuffleArray } from "../util/shuffleArray.js";
-import { Button } from "nerdy-lib";
-import { BlueButton } from "./ArcsButton/BlueButton.jsx";
+import { BlueButton, LightBlueButton, SmallGhostButton, WhiteButton } from "./ArcsButton/ArcsButtons.jsx";
 
-const NewGame = ({ handleGameStateChange }) => {
+const NewGame = ({ handleGameStateChange, isDarkMode }) => {
 	const [nPlayers, setNPlayers] = useState(2)
 	const [nLars, setNLars] = useState(1)
 	const [selectedMap, setSelectedMap] = useState(null)
@@ -46,31 +45,39 @@ const NewGame = ({ handleGameStateChange }) => {
 
 	return (
 		<div className="align-vertical align-center">
-			{!infoSelected && <BlueButton onClick={() => setInfoSelected(true)}>Info</BlueButton>}
-			{infoSelected && <AppInfo handleCloseAppInfo={() => setInfoSelected(false)} />}
+			{!infoSelected && (
+				isDarkMode ?
+					<BlueButton onClick={() => setInfoSelected(true)}>Info</BlueButton> :
+					<LightBlueButton onClick={() => setInfoSelected(true)}>Info</LightBlueButton>
+			)}
+			{infoSelected && <AppInfo handleCloseAppInfo={() => setInfoSelected(false)} isDarkMode={isDarkMode} />}
 
 			<h1>New Game</h1>
 			<div className="align-horizontal align-center block">
 				<span># Players</span>
-				<Button size="size0" fill="ghost" selected={nPlayers === 2} onClick={() => handlePlayerClick(2)}>2</Button>
-				<Button size="size0" fill="ghost" selected={nPlayers === 3} onClick={() => handlePlayerClick(3)}>3</Button>
-				<Button size="size0" fill="ghost" selected={nPlayers === 4} onClick={() => handlePlayerClick(4)}>4</Button>
+				<SmallGhostButton selected={nPlayers === 2} onClick={() => handlePlayerClick(2)}>2</SmallGhostButton>
+				<SmallGhostButton selected={nPlayers === 3} onClick={() => handlePlayerClick(3)}>3</SmallGhostButton>
+				<SmallGhostButton selected={nPlayers === 4} onClick={() => handlePlayerClick(4)}>4</SmallGhostButton>
 			</div>
 
 			<div className="align-horizontal align-center block">
 				<span># Lars</span>
-				<Button size="size0" fill="ghost" selected={nLars === 1} onClick={() => setNLars(1)}>1</Button>
-				<Button size="size0" fill="ghost" selected={nLars === 2} onClick={() => setNLars(2)}>2</Button>
+				<SmallGhostButton selected={nLars === 1} onClick={() => setNLars(1)}>1</SmallGhostButton>
+				<SmallGhostButton selected={nLars === 2} onClick={() => setNLars(2)}>2</SmallGhostButton>
 			</div>
 
 			<div className="align-vertical align-center block">
 				<span>Map for {nPlayers} players</span>
 				{maps.map((map, index) => (
-					<Button key={index} size="size5" fill="filled" selected={selectedMap === map} onClick={() => setSelectedMap(map)}>{map.slice(1, map.length)}</Button>
+					<WhiteButton key={index} selected={selectedMap === map} onClick={() => setSelectedMap(map)}>{map.slice(1, map.length)}</WhiteButton>
 				))}
 			</div>
 
-			{selectedMap && <BlueButton onClick={handleStartGame}>Start Game</BlueButton>}
+			{selectedMap && (
+				isDarkMode ?
+					<BlueButton onClick={handleStartGame}>Start Game</BlueButton> :
+					<LightBlueButton onClick={handleStartGame}>Start Game</LightBlueButton>
+			)}
 
 			{/*DEV ArcsButton to be able to change the initial state*/}
 			{/*<div className="start-game">*/}
