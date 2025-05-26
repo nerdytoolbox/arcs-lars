@@ -1,6 +1,6 @@
-import { BlueButton } from "./ArcsButton/BlueButton.jsx";
+import { BlueButton, LightBlueButton } from "./ArcsButton/ArcsButtons.jsx";
 
-const EndOfChapter = ({ handleConfirmEndOfChapter }) => {
+const EndOfChapter = ({ handleConfirmEndOfChapter, isDarkMode }) => {
 	return (
 		<div className="align-vertical align-center info-block">
 			<h1>End of Chapter Rules</h1>
@@ -14,7 +14,10 @@ const EndOfChapter = ({ handleConfirmEndOfChapter }) => {
 				<li>The Target Planet will be moved automatically after clicking the "Confirm" button.</li>
 			</ul>
 
-			<BlueButton onClick={handleConfirmEndOfChapter}>Confirm End of Chapter</BlueButton>
+			{isDarkMode ?
+				<BlueButton onClick={handleConfirmEndOfChapter}>Confirm End of Chapter</BlueButton> :
+				<LightBlueButton onClick={handleConfirmEndOfChapter}>Confirm End of Chapter</LightBlueButton>
+			}
 		</div>
 	)
 }

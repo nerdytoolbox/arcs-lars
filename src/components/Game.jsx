@@ -4,9 +4,9 @@ import Lars from "./Lars";
 import AppInfo from "./AppInfo";
 import EndOfChapter from "./EndOfChapter";
 import { randomNumber } from "../util/randomNumber.js";
-import { BlueButton, GrayButton } from "./ArcsButton/BlueButton.jsx";
+import { BlueButton, LightBlueButton, WhiteButton } from "./ArcsButton/ArcsButtons.jsx";
 
-const Game = ({ gameState, handleGameStateChange }) => {
+const Game = ({ gameState, handleGameStateChange, isDarkMode }) => {
 	const [infoSelected, setInfoSelected] = useState(false)
 	const [endOfChapterSelected, setEndOfChapterSelected] = useState(false)
 	const [selectedLars, setSelectedLars] = useState(1)
@@ -39,27 +39,31 @@ const Game = ({ gameState, handleGameStateChange }) => {
 
 	return (
 		<div className="align-vertical align-center">
-			{infoSelected && <AppInfo handleCloseAppInfo={() => setInfoSelected(false)} />}
-			{!infoSelected && <BlueButton onClick={() => setInfoSelected(true)}>Info</BlueButton>}
+			{infoSelected && <AppInfo handleCloseAppInfo={() => setInfoSelected(false)} isDarkMode={isDarkMode} />}
+			{!infoSelected && (
+				isDarkMode ?
+					<BlueButton onClick={() => setInfoSelected(true)}>Info</BlueButton> :
+					<LightBlueButton onClick={() => setInfoSelected(true)}>Info</LightBlueButton>
+			)}
 			<div className="datetime align-center">Game started on {gameState.dateTimeStarted}</div>
 			<div className="map-info align-center">{`Map: ${gameState.nPlayers} players, ${gameState.map.slice(1, gameState.map.length)}`}</div>
 			<div className="align-horizontal align-center wrap">
-				{!endOfChapterSelected && <GrayButton onClick={() => setEndOfChapterSelected(true)}>End of Chapter</GrayButton>}
-				{endOfChapterSelected && <GrayButton onClick={() => setEndOfChapterSelected(false)}>Cancel</GrayButton>}
-				<GrayButton value="Reset Game" onClick={handleResetGame}>Reset Game</GrayButton>
+				{!endOfChapterSelected && <WhiteButton onClick={() => setEndOfChapterSelected(true)}>End of Chapter</WhiteButton>}
+				{endOfChapterSelected && <WhiteButton onClick={() => setEndOfChapterSelected(false)}>Cancel</WhiteButton>}
+				<WhiteButton value="Reset Game" onClick={handleResetGame}>Reset Game</WhiteButton>
 			</div>
-			{endOfChapterSelected && <EndOfChapter handleConfirmEndOfChapter={handleEndOfChapterDone} handleExitEndOfChapter={() => setEndOfChapterSelected(false)} />}
+			{endOfChapterSelected && <EndOfChapter handleConfirmEndOfChapter={handleEndOfChapterDone} handleExitEndOfChapter={() => setEndOfChapterSelected(false)} isDarkMode={isDarkMode} />}
 			{gameState.nLars === 2 && (
 				<div className="align-vertical align-center">
 					<hr width="100%" />
 					<div className="align-horizontal">
-						<GrayButton selected={selectedLars === 1} onClick={() => setSelectedLars(1)}>Lars 1</GrayButton>
-						<GrayButton selected={selectedLars === 2} onClick={() => setSelectedLars(2)}>Lars 2</GrayButton>
+						<WhiteButton selected={selectedLars === 1} onClick={() => setSelectedLars(1)}>Lars 1</WhiteButton>
+						<WhiteButton selected={selectedLars === 2} onClick={() => setSelectedLars(2)}>Lars 2</WhiteButton>
 					</div>
 				</div>
 			)}
-			{selectedLars === 1 && (<Lars nLars={1} state={gameState.lars1} map={MAPS[gameState.map]} handleMoveFocus={handleMoveFocus} />)}
-			{selectedLars === 2 && (<Lars nLars={2} state={gameState.lars2} map={MAPS[gameState.map]} handleMoveFocus={handleMoveFocus} />)}
+			{selectedLars === 1 && (<Lars nLars={1} state={gameState.lars1} map={MAPS[gameState.map]} handleMoveFocus={handleMoveFocus} isDarkMode={isDarkMode} />)}
+			{selectedLars === 2 && (<Lars nLars={2} state={gameState.lars2} map={MAPS[gameState.map]} handleMoveFocus={handleMoveFocus} isDarkMode={isDarkMode} />)}
 		</div>
 	)
 }
