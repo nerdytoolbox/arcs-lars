@@ -3,7 +3,7 @@ import NewGame from "./components/NewGame"
 import Game from "./components/Game";
 import { ARCS_STATE, EMPTY_GAME_STATE } from "./util/constants";
 import './Arcs.scss'
-import { Hub } from "nerdy-lib";
+import { Hub, Title } from "nerdy-lib";
 
 const Arcs = () => {
 	// Checks if there is a game state in local storage and sets it to the gameState state variable. If not, it sets the gameState to the empty game state.
@@ -42,7 +42,8 @@ const Arcs = () => {
 	}
 
 	return (
-		<Hub title="Arcs - Lars bots" footer={getFooter()}>
+		<Hub footer={getFooter()}>
+			<Title icon="arcsThumbnail.png" text="Arcs - Lars bots" />
 			{!gameState.dateTimeStarted && <NewGame handleGameStateChange={handleGameStateChange} isDarkMode={isDarkMode} />}
 			{gameState.dateTimeStarted && <Game gameState={gameState} handleGameStateChange={handleGameStateChange} isDarkMode={isDarkMode} />}
 		</Hub>
