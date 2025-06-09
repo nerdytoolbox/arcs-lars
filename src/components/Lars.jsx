@@ -2,7 +2,7 @@ import { useState } from "react";
 import ListItemWithInfo from "./ListItemWithInfo";
 import { ID } from "../util/constants";
 import { randomNumber } from "../util/randomNumber.js";
-import { BlueButton, LightBlueButton, WhiteButton } from "./ArcsButton/ArcsButtons.jsx";
+import { BlueButton, LightBlueButton, WhiteButton } from "./ArcsButtons.jsx";
 
 const Lars = ({ nLars, state, map, handleMoveFocus, isDarkMode }) => {
 	const [playLeadCard, setPlayLeadCard] = useState(false);

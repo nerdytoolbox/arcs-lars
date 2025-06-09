@@ -3,7 +3,7 @@ import { EMPTY_GAME_STATE, LOCATIONS, MAPS } from "../util/constants";
 import { getOutOfPlayLocations } from "../util/getOutOfPlayLocations.js";
 import AppInfo from "./AppInfo";
 import { shuffleArray } from "../util/shuffleArray.js";
-import { BlueButton, LightBlueButton, SmallGhostButton, WhiteButton } from "./ArcsButton/ArcsButtons.jsx";
+import { BlueButton, LightBlueButton, SmallGhostButton, WhiteButton } from "./ArcsButtons.jsx";
 
 const NewGame = ({ handleGameStateChange, isDarkMode }) => {
 	const [nPlayers, setNPlayers] = useState(2)

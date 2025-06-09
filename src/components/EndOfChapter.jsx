@@ -1,4 +1,4 @@
-import { BlueButton, LightBlueButton } from "./ArcsButton/ArcsButtons.jsx";
+import { BlueButton, LightBlueButton } from "./ArcsButtons.jsx";
 
 const EndOfChapter = ({ handleConfirmEndOfChapter, isDarkMode }) => {
 	return (

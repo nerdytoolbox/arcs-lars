@@ -4,7 +4,7 @@ import Lars from "./Lars";
 import AppInfo from "./AppInfo";
 import EndOfChapter from "./EndOfChapter";
 import { randomNumber } from "../util/randomNumber.js";
-import { BlueButton, LightBlueButton, WhiteButton } from "./ArcsButton/ArcsButtons.jsx";
+import { BlueButton, LightBlueButton, WhiteButton } from "./ArcsButtons.jsx";
 
 const Game = ({ gameState, handleGameStateChange, isDarkMode }) => {
 	const [infoSelected, setInfoSelected] = useState(false)

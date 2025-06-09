@@ -1,4 +1,3 @@
-import './ArcsButton.scss'
 import { Button } from "nerdy-lib";
 
 const SIZE = "size4";
