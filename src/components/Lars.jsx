@@ -114,8 +114,8 @@ const Lars = ({ nLars, state, map, handleMoveFocus, isDarkMode }) => {
 		}
 
 		const returnDivs = []
-		if (main) returnDivs.push(<ListItemWithInfo item={main} />)
-		if (rival) returnDivs.push(<ListItemWithInfo item={rival} />)
+		if (main) returnDivs.push(<ListItemWithInfo item={main} key="influence-main" />)
+		if (rival) returnDivs.push(<ListItemWithInfo item={rival} key="influence-rival" />)
 		return returnDivs
 	}
 
@@ -125,9 +125,9 @@ const Lars = ({ nLars, state, map, handleMoveFocus, isDarkMode }) => {
 		const id = `Repair 1 loyal ship on each planet of symbol ${ID[state.targetPlanetID]}.`
 
 		return [
-			<ListItemWithInfo item={main} />,
-			<ListItemWithInfo item={focus} />,
-			<ListItemWithInfo item={id} />
+			<ListItemWithInfo item={main} key="repair-main" />,
+			<ListItemWithInfo item={focus} key="repair-focus" />,
+			<ListItemWithInfo item={id} key="repair-id" />
 		]
 	}
 
@@ -135,9 +135,9 @@ const Lars = ({ nLars, state, map, handleMoveFocus, isDarkMode }) => {
 		const cityInfo = `Priority: Planets with symbol ${ID[state.targetPlanetID]} > Different planet resource than other cities > Most fresh loyal ships.`
 
 		return [
-			<ListItemWithInfo item="Build 1 city where Lars has control." info={cityInfo} />,
-			<ListItemWithInfo item="Build 3 ships at starport." />,
-			<ListItemWithInfo item="If nothing was build, repair all loyal ships and buildings." />
+			<ListItemWithInfo item="Build 1 city where Lars has control." info={cityInfo} key="build-city" />,
+			<ListItemWithInfo item="Build 3 ships at starport." key="build-ships" />,
+			<ListItemWithInfo item="If nothing was build, repair all loyal ships and buildings." key="build-extra" />
 		]
 	}
 
@@ -145,16 +145,16 @@ const Lars = ({ nLars, state, map, handleMoveFocus, isDarkMode }) => {
 		const moveInfo = `It wants to control systems in this order: Target planet (Cluster ${state.targetPlanet} - ${ID[state.targetPlanetID]}) > ${ID[state.targetPlanetID]} planets with empty building slots > ${ID[state.targetPlanetID]} planets with rival cities > ${ID[state.targetPlanetID]} planets with rival starports > ${ID[state.targetPlanetID]} planets with rival ships > The Gate of Cluster ${state.targetPlanet}. If it cannot catapult to the system, it will first move ships to systems on the way to take away control.`
 
 		return [
-			<ListItemWithInfo item="Remove fresh loyal ships from systems with no rival ships (leave 1 behind if there are buildings)." />,
-			<ListItemWithInfo item="Place removed ships on planet with owned starport." />,
-			<ListItemWithInfo item="Catapult move ships from starport until there are none left." info={moveInfo} />
+			<ListItemWithInfo item="Remove fresh loyal ships from systems with no rival ships (leave 1 behind if there are buildings)." key="move-1" />,
+			<ListItemWithInfo item="Place removed ships on planet with owned starport." key="move-2" />,
+			<ListItemWithInfo item="Catapult move ships from starport until there are none left." info={moveInfo} key="move-3" />
 		]
 	}
 
 	const showBattleInstructions = () => {
 		return [
-			<ListItemWithInfo item="In each system with rival ships. battle once with only skirmish dice." info="Defender: Rival with most power. Maximise the number of damaged ships (also for Lars)." />,
-			<ListItemWithInfo item={`In the Gate of Cluster ${state.targetPlanet} and all ${ID[state.targetPlanetID]} planets, battle once. See info.`} info="Defender: Rival with most power. If defender has city and no ships: roll up to 2 raid dice per defender city, remainder skirmish dice, defender chooses what gets stolen, don't provoke outrage. Otherwise: Round half (up) assault dice, remainder skirmish dice." />
+			<ListItemWithInfo item="In each system with rival ships. battle once with only skirmish dice." info="Defender: Rival with most power. Maximise the number of damaged ships (also for Lars)." key="battle-1" />,
+			<ListItemWithInfo item={`In the Gate of Cluster ${state.targetPlanet} and all ${ID[state.targetPlanetID]} planets, battle once. See info.`} info="Defender: Rival with most power. If defender has city and no ships: roll up to 2 raid dice per defender city, remainder skirmish dice, defender chooses what gets stolen, don't provoke outrage. Otherwise: Round half (up) assault dice, remainder skirmish dice." key="battle-2" />
 		]
 	}
 
@@ -163,14 +163,14 @@ const Lars = ({ nLars, state, map, handleMoveFocus, isDarkMode }) => {
 
 		switch (cardSuit) {
 			case "Aggression":
-				returnDivs.push(<ListItemWithInfo item="Secure all cards in court where Lars has more agents." />)
+				returnDivs.push(<ListItemWithInfo item="Secure all cards in court where Lars has more agents." key="secure" />)
 				returnDivs.push(showMoveInstructions())
 				returnDivs.push(showBattleInstructions())
 				break;
 			case "Administration":
 				returnDivs.push(showInfluenceInstructions())
 				returnDivs.push(showRepairInstructions())
-		returnDivs.push(<ListItemWithInfo item="Tax all valid cities" info="Owned and controlled rival cities." />)
+		returnDivs.push(<ListItemWithInfo item="Tax all valid cities" info="Owned and controlled rival cities." key="tax" />)
 				break
 			case "Mobilisation":
 				returnDivs.push(showInfluenceInstructions())

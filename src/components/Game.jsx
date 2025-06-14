@@ -6,13 +6,13 @@ import EndOfChapter from "./EndOfChapter";
 import { randomNumber } from "../util/randomNumber.js";
 import { BlueButton, LightBlueButton, WhiteButton } from "./ArcsButtons.jsx";
 
-const Game = ({ gameState, handleGameStateChange, isDarkMode }) => {
+const Game = ({ gameState, updateGameState, isDarkMode }) => {
 	const [infoSelected, setInfoSelected] = useState(false)
 	const [endOfChapterSelected, setEndOfChapterSelected] = useState(false)
 	const [selectedLars, setSelectedLars] = useState(1)
 
 	const handleResetGame = () => {
-		handleGameStateChange(JSON.parse(JSON.stringify(EMPTY_GAME_STATE)))
+		updateGameState([{ path: "", value: JSON.parse(JSON.stringify(EMPTY_GAME_STATE)) }])
 	}
 
 	const handleMoveFocus = (nLars) => {
@@ -24,9 +24,7 @@ const Game = ({ gameState, handleGameStateChange, isDarkMode }) => {
 		larsState.targetPlanet = nextPossibleLocations[randomPlanetNumber].slice(0,1)
 		larsState.targetPlanetID = nextPossibleLocations[randomPlanetNumber].slice(2,3)
 
-		handleGameStateChange({
-			[`lars${nLars}`]: larsState
-		})
+		updateGameState([{ path: `lars${nLars}`, value: larsState }])
 	}
 
 	const handleEndOfChapterDone = () => {

@@ -3,11 +3,11 @@ import NewGame from "./components/NewGame"
 import Game from "./components/Game";
 import { ARCS_STATE, EMPTY_GAME_STATE } from "./util/constants";
 import './Arcs.scss'
-import { Hub, Title } from "nerdy-lib";
+import { Hub, Title, useStorage } from "nerdy-lib";
 
 const Arcs = () => {
 	// Checks if there is a game state in local storage and sets it to the gameState state variable. If not, it sets the gameState to the empty game state.
-	const [gameState, setGameState] = useState(localStorage.getItem(ARCS_STATE) ? JSON.parse(localStorage.getItem(ARCS_STATE)) : JSON.parse(JSON.stringify(EMPTY_GAME_STATE)))
+	const { data: gameState, update } = useStorage(ARCS_STATE, EMPTY_GAME_STATE, [])
 	const [isDarkMode, setIsDarkMode] = useState(false);
 
 	useEffect(() => {
@@ -19,15 +19,6 @@ const Arcs = () => {
 
 		return () => mediaQuery.removeEventListener('change', handleChange);
 	}, []);
-
-	// Sets the game state in local storage and updates the gameState state variable.
-	const handleGameStateChange = (object) => {
-		setGameState(prevState => {
-			const newState = { ...prevState, ...object }
-			localStorage.setItem(ARCS_STATE, JSON.stringify(newState))
-			return newState
-		})
-	}
 
 	const getFooter = () => {
 		return (
@@ -44,8 +35,8 @@ const Arcs = () => {
 	return (
 		<Hub footer={getFooter()}>
 			<Title icon="arcsThumbnail.png" text="Arcs - Lars bots" />
-			{!gameState.dateTimeStarted && <NewGame handleGameStateChange={handleGameStateChange} isDarkMode={isDarkMode} />}
-			{gameState.dateTimeStarted && <Game gameState={gameState} handleGameStateChange={handleGameStateChange} isDarkMode={isDarkMode} />}
+			{!gameState?.dateTimeStarted && <NewGame updateGameState={update} isDarkMode={isDarkMode} />}
+			{gameState?.dateTimeStarted && <Game gameState={gameState} updateGameState={update} isDarkMode={isDarkMode} />}
 		</Hub>
 	)
 }

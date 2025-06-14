@@ -1,6 +1,7 @@
 export const ARCS_STATE = "arcsState"
 
 export const EMPTY_GAME_STATE = Object.freeze({
+	version: 1,
 	dateTimeStarted: null,
 	map: null,
 	nPlayers: null,
