@@ -27,7 +27,7 @@ const Arcs = () => {
 				<span> | </span>
 				<a href="https://boardgamegeek.com/thread/3378766/arcs-solo-bot-lars">Rules from Shipple (Andries Lubbe)</a>
 				<span> | </span>
-				<span>v1.0.0</span>
+				<span>v1.2.0</span>
 			</div>
 		)
 	}
