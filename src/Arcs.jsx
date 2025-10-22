@@ -4,8 +4,11 @@ import Game from "./components/Game";
 import { ARCS_STATE, EMPTY_GAME_STATE } from "./util/constants";
 import './Arcs.scss'
 import { Hub, Title, useStorage } from "nerdy-lib";
+import { useAnalyticsConsent, CookieModal } from "nerdy-lib";
 
 const Arcs = () => {
+	useAnalyticsConsent()
+
 	// Checks if there is a game state in local storage and sets it to the gameState state variable. If not, it sets the gameState to the empty game state.
 	const { data: gameState, update } = useStorage(ARCS_STATE, EMPTY_GAME_STATE, [])
 	const [isDarkMode, setIsDarkMode] = useState(false);
@@ -37,6 +40,7 @@ const Arcs = () => {
 			<Title icon="arcsThumbnail.png" text="Arcs - Lars bots" />
 			{!gameState?.dateTimeStarted && <NewGame updateGameState={update} isDarkMode={isDarkMode} />}
 			{gameState?.dateTimeStarted && <Game gameState={gameState} updateGameState={update} isDarkMode={isDarkMode} />}
+			<CookieModal />
 		</Hub>
 	)
 }
