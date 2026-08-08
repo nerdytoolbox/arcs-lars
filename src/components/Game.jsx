@@ -24,9 +24,7 @@ const Game = ({ gameState, updateGameState, isDarkMode }) => {
 		)
 
 		const outOfPlayLocations = getOutOfPlayLocations(MAPS[gameState.map], larsState.playerNumber, activeLarsPlayerNumbers)
-		const currentLocation = `${larsState.targetPlanet}-${larsState.targetPlanetID}`
-
-		const nextPossibleLocations = LOCATIONS.filter(location => !outOfPlayLocations.includes(location) && location !== currentLocation)
+		const nextPossibleLocations = LOCATIONS.filter(location => !outOfPlayLocations.includes(location) && !location.startsWith(larsState.targetPlanet))
 		const randomPlanetNumber = randomNumber(0, nextPossibleLocations.length-1)
 
 		larsState.targetPlanet = nextPossibleLocations[randomPlanetNumber].slice(0,1)
