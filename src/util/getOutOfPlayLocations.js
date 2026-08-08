@@ -1,3 +1,7 @@
-export const getOutOfPlayLocations = (mapData) => {
-	return [...mapData.outOfPlay, ...Object.values(mapData.larsStarport)]
+export const getOutOfPlayLocations = (mapData, currentPlayerNumber, activeLarsPlayerNumbers) => {
+	const rivalStarports = activeLarsPlayerNumbers
+		.filter(playerNumber => playerNumber !== currentPlayerNumber)
+		.map(playerNumber => mapData.larsStarport[playerNumber])
+
+	return [...mapData.outOfPlay, ...rivalStarports]
 }

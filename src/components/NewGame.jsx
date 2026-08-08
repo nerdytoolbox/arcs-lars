@@ -19,22 +19,30 @@ const NewGame = ({ updateGameState, isDarkMode }) => {
 	const handleStartGame = () => {
 		const updateBatch = []
 
-
 		updateBatch.push({ path: "dateTimeStarted", value: new Date().toLocaleString() })
 		updateBatch.push({ path: "nPlayers", value: nPlayers })
 		updateBatch.push({ path: "nLars", value: nLars })
 		updateBatch.push({ path: "map", value: selectedMap })
 
-		// Determine which player number the Lars are
+		// Determine which playerNumber each Lars has
 		const playersArray = shuffleArray(Array.from({length: nPlayers}, (_, i) => i + 1)).slice(0, nLars).sort()
-
-		// Determine the starting Target Planet of the Lars
-		const inPlayLocations = shuffleArray(LOCATIONS.filter(location => !getOutOfPlayLocations(MAPS[selectedMap]).includes(location)))
-
+		const activeLarsPlayerNumbers = []
 		for (let i = 0; i < nLars; i++) {
-			updateBatch.push({ path: `lars${i+1}.playerNumber`, value: playersArray[i] })
-			updateBatch.push({ path: `lars${i+1}.targetPlanet`, value: inPlayLocations[i].slice(0,1) }) // From format <targetPlanet>-<targetPlanetID>
-			updateBatch.push({ path: `lars${i+1}.targetPlanetID`, value: inPlayLocations[i].slice(2,3) }) // From format <targetPlanet>-<targetPlanetID>
+			const playerNumber = playersArray[i]
+			activeLarsPlayerNumbers.push(playerNumber)
+			updateBatch.push({ path: `lars${i+1}.playerNumber`, value: playerNumber })
+		}
+
+		// Determine of which location each Lars starts
+		const selectedLocations = []
+		for (let i = 0; i < nLars; i++) {
+			const currentLarsPlayerNumber = activeLarsPlayerNumbers[i]
+			const outOfPlayLocations = getOutOfPlayLocations(MAPS[selectedMap], currentLarsPlayerNumber, activeLarsPlayerNumbers)
+			const inPlayLocations = shuffleArray(LOCATIONS.filter(location => !outOfPlayLocations.includes(location) && !selectedLocations.includes(location)))
+			const selectedLocation = inPlayLocations[0]
+			selectedLocations.push(selectedLocation)
+			updateBatch.push({ path: `lars${i+1}.targetPlanet`, value: selectedLocation.slice(0,1) }) // From format <targetPlanet>-<targetPlanetID>
+			updateBatch.push({ path: `lars${i+1}.targetPlanetID`, value: selectedLocation.slice(2,3) }) // From format <targetPlanet>-<targetPlanetID>
 		}
 
 		updateGameState(updateBatch)

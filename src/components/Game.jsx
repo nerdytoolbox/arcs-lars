@@ -4,6 +4,7 @@ import Lars from "./Lars";
 import AppInfo from "./AppInfo";
 import EndOfChapter from "./EndOfChapter";
 import { randomNumber } from "../util/randomNumber.js";
+import { getOutOfPlayLocations } from "../util/getOutOfPlayLocations.js";
 import { BlueButton, LightBlueButton, WhiteButton } from "./ArcsButtons.jsx";
 
 const Game = ({ gameState, updateGameState, isDarkMode }) => {
@@ -17,8 +18,15 @@ const Game = ({ gameState, updateGameState, isDarkMode }) => {
 
 	const handleMoveFocus = (nLars) => {
 		const larsState = JSON.parse(JSON.stringify(gameState[`lars${nLars}`]))
+		const activeLarsPlayerNumbers = Array.from(
+			{ length: gameState.nLars },
+			(_, index) => gameState[`lars${index + 1}`].playerNumber
+		)
 
-		const nextPossibleLocations = LOCATIONS.filter(location => !MAPS[gameState.map].outOfPlay.includes(location) && !Object.values(MAPS[gameState.map].larsStarport).includes(location) && location !== larsState.targetPlanet + "-" + larsState.targetPlanetID)
+		const outOfPlayLocations = getOutOfPlayLocations(MAPS[gameState.map], larsState.playerNumber, activeLarsPlayerNumbers)
+		const currentLocation = `${larsState.targetPlanet}-${larsState.targetPlanetID}`
+
+		const nextPossibleLocations = LOCATIONS.filter(location => !outOfPlayLocations.includes(location) && location !== currentLocation)
 		const randomPlanetNumber = randomNumber(0, nextPossibleLocations.length-1)
 
 		larsState.targetPlanet = nextPossibleLocations[randomPlanetNumber].slice(0,1)
