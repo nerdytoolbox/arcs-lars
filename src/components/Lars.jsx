@@ -82,10 +82,11 @@ const Lars = ({ nLars, state, map, handleMoveFocus, isDarkMode }) => {
 		setPlayLeadCard(false)
 		setPlayFollowCard(false)
 		setCardSuit(null)
+		setShowInstructions(false)
 		setDeclareAmbition(false)
 		setCopyLeadCard(false)
+		setSeizeInitiative(false)
 		setMoveFocus(false)
-		setShowInstructions(false)
 	}
 
 	// Helper functions that generate (randomly generated) instructions for a specific Action
